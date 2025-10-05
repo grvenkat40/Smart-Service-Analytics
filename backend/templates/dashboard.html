@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Smart Service Analysis</title>
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/dashboard.css') }}">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-brand">
+            <span><img src="{{ url_for('static',filename='images/SmartServce_logo.jpg') }}" width=40px height="40px" alt="Logo"></span>
+            <span>Smart Service Analysis</span>
+        </div>
+        <div class="navbar-user">
+            <div class="user-info">
+                <div class="user-avatar">{{username[0]}}</div>
+                <span>{{username}}</span>
+            </div>
+            <a href="{{ url_for('logout') }}" class="logout-btn">Logout</a>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="welcome-section">
+            <h1>Welcome back, {{username}}! 👋</h1>
+            <p>Here's what's happening with your services today.</p>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-header">
+                    <div>
+                        <div class="stat-value">2,847</div>
+                        <div class="stat-label">Total Services</div>
+                    </div>
+                    <div class="stat-icon blue">📈</div>
+                </div>
+                <div class="stat-change">↑ 12% from last month</div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-header">
+                    <div>
+                        <div class="stat-value">94.8%</div>
+                        <div class="stat-label">Service Quality</div>
+                    </div>
+                    <div class="stat-icon green">✓</div>
+                </div>
+                <div class="stat-change">↑ 2.4% from last week</div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-header">
+                    <div>
+                        <div class="stat-value">38</div>
+                        <div class="stat-label">Active Issues</div>
+                    </div>
+                    <div class="stat-icon orange">⚠</div>
+                </div>
+                <div class="stat-change negative">↓ 5 from yesterday</div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-header">
+                    <div>
+                        <div class="stat-value">$124.5K</div>
+                        <div class="stat-label">Revenue</div>
+                    </div>
+                    <div class="stat-icon purple">💰</div>
+                </div>
+                <div class="stat-change">↑ 8.3% from last month</div>
+            </div>
+        </div>
+
+        <div class="charts-grid">
+            <div class="chart-card">
+                <div class="chart-header">
+                    <h3>Service Performance</h3>
+                    <p>Last 30 days overview</p>
+                </div>
+                <div class="chart-placeholder">
+                    📊 Chart: Service Performance Trends
+                </div>
+            </div>
+
+            <div class="chart-card">
+                <div class="chart-header">
+                    <h3>Customer Satisfaction</h3>
+                    <p>Weekly ratings analysis</p>
+                </div>
+                <div class="chart-placeholder">
+                    📈 Chart: Customer Satisfaction Scores
+                </div>
+            </div>
+        </div>
+
+        <div class="recent-activity">
+            <div class="activity-header">
+                <h3>Recent Activity</h3>
+            </div>
+            <ul class="activity-list">
+                <li class="activity-item">
+                    <div class="activity-info">
+                        <div class="activity-dot"></div>
+                        <div class="activity-text">New service request submitted by Customer #2847</div>
+                    </div>
+                    <div class="activity-time">2 minutes ago</div>
+                </li>
+                <li class="activity-item">
+                    <div class="activity-info">
+                        <div class="activity-dot green"></div>
+                        <div class="activity-text">Service #1823 completed successfully</div>
+                    </div>
+                    <div class="activity-time">15 minutes ago</div>
+                </li>
+                <li class="activity-item">
+                    <div class="activity-info">
+                        <div class="activity-dot orange"></div>
+                        <div class="activity-text">Issue reported for Service #9234</div>
+                    </div>
+                    <div class="activity-time">1 hour ago</div>
+                </li>
+                <li class="activity-item">
+                    <div class="activity-info">
+                        <div class="activity-dot"></div>
+                        <div class="activity-text">ML model updated with new data</div>
+                    </div>
+                    <div class="activity-time">3 hours ago</div>
+                </li>
+                <li class="activity-item">
+                    <div class="activity-info">
+                        <div class="activity-dot green"></div>
+                        <div class="activity-text">Monthly report generated</div>
+                    </div>
+                    <div class="activity-time">5 hours ago</div>
+                </li>
+            </ul>
+        </div>
+    </div>
+     <footer class="dashboard-footer">
+        <div class="footer-container">
+            <div class="footer-main">
+                <!-- About Section -->
+                <div class="footer-section footer-about">
+                    <div class="footer-logo">
+                        <div class="footer-logo-icon">
+                            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M9 3v2H4v2h1v13a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V7h1V5h-5V3H9zm2 2h2v2h-2V5zm-4 4h10v11H7V9zm2 2v2h2v-2H9zm4 0v2h2v-2h-2zm-4 4v2h2v-2H9zm4 0v2h2v-2h-2z"/>
+                            </svg>
+                        </div>
+                        <span class="footer-logo-text">Smart Service Analytics</span>
+                    </div>
+                    <p>Empowering businesses with intelligent analytics and data-driven insights. Transform your service operations with real-time monitoring and comprehensive reporting.</p>
+                    <div class="social-links">
+                        <a href="https://grvenkat40-portfolio.onrender.com/" class="social-link" title="Facebook"><img src="{{url_for('static',filename='images/venkat_title.png')}}" width="40px" height="40px" alt="LinkedIn"></a>
+                        <!-- <a href="#" class="social-link" title="Twitter">🐦</a> -->
+                        <a href="https://www.linkedin.com/in/venkatgr/" class="social-link" title="LinkedIn"><img src="{{url_for('static',filename='images/linkedin.png')}}" width="40px" height="40px" alt="LinkedIn"></a>
+                        <a href="https://www.instagram.com/venkat_40_smart?igsh=MXNiNXdqcjlkZnloag%3D%3D" class="social-link" title="Instagram"><img src="{{url_for('static',filename='images/social.png')}}" width="40px" height="40px" alt="LinkedIn"></a>
+                        <a href="https://github.com/grvenkat40" class="social-link" title="GitHub"><img src="{{url_for('static',filename='images/github.png')}}" width="40px" height="40px" alt="LinkedIn"></a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Dashboard</a></li>
+                        <li><a href="#">Analytics</a></li>
+                        <li><a href="#">Reports</a></li>
+                        <li><a href="#">Services</a></li>
+                        <li><a href="#">Settings</a></li>
+                        <li><a href="#">Documentation</a></li>
+                    </ul>
+                </div>
+
+                <!-- Resources -->
+                <div class="footer-section">
+                    <h3>Resources</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Help Center</a></li>
+                        <li><a href="#">API Documentation</a></li>
+                        <li><a href="#">Community Forum</a></li>
+                        <li><a href="#">Video Tutorials</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">FAQs</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact & Newsletter -->
+                <div class="footer-section">
+                    <h3>Contact Us</h3>
+                    <ul class="footer-contact-info">
+                        <li>
+                            <div class="contact-icon">
+                                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <a href="mailto:support@smartservice.com">support@smartservice.com</a>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="contact-icon">
+                                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+                                </svg>
+                            </div>
+                            <div>
+                                <a href="tel:+1234567890">+91 9347467672</a>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="contact-icon">
+                                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                                </svg>
+                            </div>
+                            <div>Tirupati, Andhra Pradesh, India</div>
+                        </li>
+                    </ul>
+                    
+                    <h3 style="margin-top: 25px;">Newsletter</h3>
+                    <form class="newsletter-form" onsubmit="handleNewsletter(event)">
+                        <input type="email" class="newsletter-input" placeholder="Your email" required>
+                        <button type="submit" class="newsletter-btn">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Footer Bottom -->
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    © 2025 <a href="#">Smart Service Analytics</a>. All rights reserved. | Developed by <a href="#">Venkat G R</a>
+                </div>
+                <ul class="footer-bottom-links">
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Cookie Policy</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" id="backToTop" onclick="scrollToTop()">↑</button>
+
+    <script src="{{ url_for('static',filename='dashboard.js') }}" ></script>
+</body>
+
+</html>

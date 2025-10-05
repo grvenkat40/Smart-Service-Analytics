@@ -1,17 +1,174 @@
 <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Service Analytics - Login</title>
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/login_style.css')}}">
+</head>
+<body>
+    <div class="login-container">
+        <div class="logo-section">
+            <div class="logo">
+                <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M9 3v2H4v2h1v13a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V7h1V5h-5V3H9zm2 2h2v2h-2V5zm-4 4h10v11H7V9zm2 2v2h2v-2H9zm4 0v2h2v-2h-2zm-4 4v2h2v-2H9zm4 0v2h2v-2h-2z"/>
+                </svg>
+            </div>
+            <h1>Smart Service Analytics</h1>
+            <p class="subtitle">Login to access your dashboard</p>
+        </div>
 
-<html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Smart Service Login</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="">
-    </head>
-    <body>
-        <h1>Login</h1>
-        
-        <script src="" async defer></script>
-    </body>
+        <!-- Flask Flash Messages -->
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <script>alert('{{ messages[0] }}')</script>
+            {% endif %}
+        {% endwith %}
+
+        <form id="loginForm" method="POST" action="{{ url_for('login') }}">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <div class="input-wrapper">
+                    <span class="input-icon"><img src="{{ url_for('static',filename='images/user.png') }}" width="15px" height="15px" alt="user"></span>
+                    <input 
+                        type="text" 
+                        id="username" 
+                        name="username" 
+                        placeholder="Enter your username"
+                        required
+                    >
+                </div>
+                <div class="error-message" id="usernameError">Please enter a valid username</div>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <div class="input-wrapper">
+                    <span class="input-icon"><img src="{{ url_for('static',filename='images/mail.png') }}" width="15px" height="15px" alt="user"></span>
+                    <input 
+                        type="email" 
+                        id="email" 
+                        name="email" 
+                        placeholder="Enter your email"
+                        required
+                    >
+                </div>
+                <div class="error-message" id="emailError">Please enter a valid email address</div>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <div class="input-wrapper">
+                    <span class="input-icon"><img src="{{ url_for('static',filename='images/password.png') }}" width="20px" height="20px" alt="user"></span>
+                    <input 
+                        type="password" 
+                        id="password" 
+                        name="password" 
+                        placeholder="Enter your password"
+                        required
+                    >
+                    <span class="password-toggle" id="togglePassword">👁️</span>
+                </div>
+                <div class="error-message" id="passwordError">Password must be at least 6 characters</div>
+            </div>
+
+            <div class="remember-forgot">
+                <label class="remember-me">
+                    <input type="checkbox" id="rememberMe" name="rememberMe">
+                    <span>Remember me</span>
+                </label>
+                <a href="#" class="forgot-password">Forgot Password?</a>
+            </div>
+
+            <button type="submit" class="login-btn">Login</button>
+        </form>
+
+        <div class="divider">OR</div>
+
+        <div class="signup-link">
+            Don't have an account? <a href="{{ url_for('register') }}">Sign Up</a>
+        </div>
+    </div>
+
+    <script>
+        // Password toggle functionality
+        const togglePassword = document.getElementById('togglePassword');
+        const passwordInput = document.getElementById('password');
+
+        togglePassword.addEventListener('click', function() {
+            const type = passwordInput.type === 'password' ? 'text' : 'password';
+            passwordInput.type = type;
+            this.textContent = type === 'password' ? '👁️' : '👁️‍🗨️';
+        });
+
+        // Client-side validation (optional - server validates too)
+        const loginForm = document.getElementById('loginForm');
+        const username = document.getElementById('username');
+        const email = document.getElementById('email');
+        const password = document.getElementById('password');
+
+        loginForm.addEventListener('submit', function(e) {
+            // Reset error messages
+            document.querySelectorAll('.error-message').forEach(el => el.style.display = 'none');
+            
+            let isValid = true;
+
+            // Validate username
+            if (username.value.trim().length < 3) {
+                document.getElementById('usernameError').style.display = 'block';
+                isValid = false;
+            }
+
+            // Validate email
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailPattern.test(email.value)) {
+                document.getElementById('emailError').style.display = 'block';
+                isValid = false;
+            }
+
+            // Validate password
+            if (password.value.length < 6) {
+                document.getElementById('passwordError').style.display = 'block';
+                isValid = false;
+            }
+
+            // Prevent submission if validation fails
+            if (!isValid) {
+                e.preventDefault();
+            }
+        });
+
+        // Real-time validation
+        username.addEventListener('input', function() {
+            if (this.value.trim().length >= 3) {
+                document.getElementById('usernameError').style.display = 'none';
+            }
+        });
+
+        email.addEventListener('input', function() {
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (emailPattern.test(this.value)) {
+                document.getElementById('emailError').style.display = 'none';
+            }
+        });
+
+        password.addEventListener('input', function() {
+            if (this.value.length >= 6) {
+                document.getElementById('passwordError').style.display = 'none';
+            }
+        });
+
+        // Auto-hide flash messages after 5 seconds
+        setTimeout(function() {
+            const alerts = document.querySelectorAll('.alert');
+            alerts.forEach(function(alert) {
+                alert.style.transition = 'opacity 0.5s';
+                alert.style.opacity = '0';
+                setTimeout(function() {
+                    alert.remove();
+                }, 500);
+            });
+        }, 5000);
+    </script>
+</body>
 </html>
